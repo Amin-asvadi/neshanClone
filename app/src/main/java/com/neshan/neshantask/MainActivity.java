@@ -36,7 +36,6 @@ import com.neshan.neshantask.core.location.BoundLocationManager;
 import com.neshan.neshantask.core.location.LocationListener;
 
 import com.neshan.neshantask.core.util.Util;
-import com.neshan.neshantask.data.network.Result;
 import com.neshan.neshantask.databinding.ActivityMainBinding;
 
 import org.neshan.common.model.LatLng;

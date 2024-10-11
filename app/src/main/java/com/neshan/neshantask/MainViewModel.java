@@ -14,10 +14,11 @@ import com.neshan.neshantask.data.model.response.AddressDetailResponse;
 import com.neshan.neshantask.data.model.response.Route;
 import com.neshan.neshantask.data.model.response.RoutingResponse;
 import com.neshan.neshantask.data.model.response.Step;
-import com.neshan.neshantask.data.network.Result;
 
 import org.neshan.common.model.LatLng;
 import org.neshan.common.utils.PolylineEncoding;
+
+import com.neshan.neshantask.data.network.Result;
 import com.neshan.neshantask.data.util.Event;
 
 import java.util.ArrayList;
@@ -103,7 +104,7 @@ public class MainViewModel extends AndroidViewModel {
      * try to load address detail from server
      */
     public void loadAddressForLocation(LatLng latLng) {
-        mLocationAddressDetail.postValue(Result.Companion.loading());
+        mLocationAddressDetail.postValue(Result.loading());
         mModel.getAddress(latLng.getLatitude(), latLng.getLongitude())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe();
