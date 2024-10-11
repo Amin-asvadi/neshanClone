@@ -183,7 +183,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         viewModel.getGeneralErrorLiveData().observe(this, new EventObserver<>(error -> {
             // show snack bar for errors
             Util.showError(mBinding.getRoot(), error);
-            return null;
         }));
 
     }
