@@ -21,7 +21,7 @@ import com.google.android.gms.location.LocationRequest
 import com.google.android.material.snackbar.Snackbar
 import com.neshan.neshantask.R
 import com.neshan.neshantask.core.location.BoundLocationManager
-import com.neshan.neshantask.core.location.BoundLocationManager.Companion.REQUEST_CODE_FOREGROUND_PERMISSIONS
+import com.neshan.neshantask.core.location.BoundLocationManager.REQUEST_CODE_FOREGROUND_PERMISSIONS
 import com.neshan.neshantask.core.location.LocationListener
 import com.neshan.neshantask.core.snackbar.SnackBar
 import com.neshan.neshantask.core.util.angleWithNorthAxis
