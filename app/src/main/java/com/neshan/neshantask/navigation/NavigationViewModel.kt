@@ -7,9 +7,7 @@ import androidx.databinding.ObservableField
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.neshan.neshantask.core.util.distanceFrom
-import com.neshan.neshantask.core.util.equalsTo
-import com.neshan.neshantask.core.util.getError
+import com.neshan.neshantask.core.util.Util
 import com.neshan.neshantask.data.model.enums.RoutingType
 import com.neshan.neshantask.data.model.error.GeneralError
 import com.neshan.neshantask.data.model.response.RoutingResponse
@@ -167,7 +165,8 @@ class NavigationViewModel @Inject constructor(
 
                     override fun onError(e: Throwable) {
                         mLoadingDirection = false
-                        _generalError.postValue(Event(e.getError()))
+                        val generalError = Util.getError(e)
+                        _generalError.postValue(Event(generalError))
                     }
 
                 })
@@ -184,9 +183,9 @@ class NavigationViewModel @Inject constructor(
         if (currentPoint != null && nextPoint != null && mUserLocation != null) {
             val userPoint = LatLng(mUserLocation!!.latitude, mUserLocation!!.longitude)
 
-            val currentToNextDistance = currentPoint.distanceFrom(nextPoint)[0]
-            val currentToUserDistance = currentPoint.distanceFrom(userPoint)[0]
-            val nextToUserDistance = nextPoint.distanceFrom(userPoint)[0]
+            val currentToNextDistance = Util.distanceFrom(currentPoint, nextPoint)[0]
+            val currentToUserDistance = Util.distanceFrom(currentPoint, userPoint)[0]
+            val nextToUserDistance = Util.distanceFrom(nextPoint, userPoint)[0]
 
             // check if user moved backward
             val isUserMovedBackward = nextToUserDistance > currentToNextDistance
@@ -238,15 +237,13 @@ class NavigationViewModel @Inject constructor(
                     val startingPoint = remainedPoints.first()
 
                     // check if start point is new
-                    if (mLastStartingPoint?.equalsTo(startingPoint) != true) {
-
+                    if (mLastStartingPoint?.let { Util.equalsTo(it, startingPoint) } != true) {
                         mLastStartingPoint = startingPoint
 
                         _progressPoints.postValue(ArrayList(remainedPoints))
 
-                        // start animating marker
+                        // Start animating marker
                         startMarkerAnimation(startingPoint, remainedPoints[1])
-
                     }
 
                 }
@@ -261,7 +258,7 @@ class NavigationViewModel @Inject constructor(
      * animates marker position from start point to end point
      * */
     private fun startMarkerAnimation(start: LatLng, end: LatLng) {
-        if (start.equalsTo(end)) {
+        if (Util.equalsTo( start,end)) {
             return
         }
 
@@ -269,7 +266,7 @@ class NavigationViewModel @Inject constructor(
         cancelMarkerAnimation()
 
         // animate marker from start point to end point in calculated duration (animationDuration)
-        val distance = start.distanceFrom(end).getOrNull(0) ?: 1f
+        val distance =Util.distanceFrom(start,end).getOrNull(0) ?: 1f
         if (distance > 0) {
 
             val animationDuration = distance * mSpeedCalculator.getAverageSpeedRatio()
@@ -330,8 +327,11 @@ class NavigationViewModel @Inject constructor(
                 val duration = newTime - mLastTime
 
                 // calculate traveled distance from previous update
-                mLastLocation?.distanceFrom(latLng)?.getOrNull(0)?.let { distance ->
-                    if (distance > 0 && duration > 0) {
+                mLastLocation?.let { lastLocation ->
+                    val distanceArray = Util.distanceFrom(lastLocation, latLng)
+                    val distance = distanceArray.getOrNull(0)
+
+                    if (distance != null && distance > 0 && duration > 0) {
                         val speed = duration / distance
                         mRecords[mIndex % mRecords.size] = speed
                         mIndex++

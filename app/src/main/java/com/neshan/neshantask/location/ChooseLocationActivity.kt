@@ -9,6 +9,7 @@ import android.provider.Settings
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.toBitmap
 import com.carto.styles.MarkerStyleBuilder
 import com.carto.utils.BitmapUtils
 import com.google.android.gms.location.LocationRequest
@@ -17,7 +18,6 @@ import com.neshan.neshantask.R
 import com.neshan.neshantask.core.location.BoundLocationManager
 import com.neshan.neshantask.core.location.BoundLocationManager.REQUEST_CODE_FOREGROUND_PERMISSIONS
 import com.neshan.neshantask.core.location.LocationListener
-import com.neshan.neshantask.core.util.toBitmap
 import com.neshan.neshantask.databinding.ActivityChooseLocationBinding
 import org.neshan.common.model.LatLng
 import org.neshan.mapsdk.model.Marker

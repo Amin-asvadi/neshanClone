@@ -6,8 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-
-import com.neshan.neshantask.core.util.FunctionExtensionKt;
+import com.neshan.neshantask.core.util.Util;
 import com.neshan.neshantask.data.model.enums.RoutingType;
 import com.neshan.neshantask.data.model.error.GeneralError;
 import com.neshan.neshantask.data.model.error.SimpleError;
@@ -159,7 +158,7 @@ public class MainViewModel extends AndroidViewModel {
 
                         @Override
                         public void onError(Throwable e) {
-                            mGeneralError.postValue(new Event<>(FunctionExtensionKt.getError(e)));
+                            mGeneralError.postValue(new Event<>(Util.getError(e)));
                         }
                     });
         }

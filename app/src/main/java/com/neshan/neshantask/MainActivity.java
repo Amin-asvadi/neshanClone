@@ -34,7 +34,8 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.material.snackbar.Snackbar;
 import com.neshan.neshantask.core.location.BoundLocationManager;
 import com.neshan.neshantask.core.location.LocationListener;
-import com.neshan.neshantask.core.util.FunctionExtensionKt;
+
+import com.neshan.neshantask.core.util.Util;
 import com.neshan.neshantask.data.network.Result;
 import com.neshan.neshantask.databinding.ActivityMainBinding;
 
@@ -181,7 +182,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
         viewModel.getGeneralErrorLiveData().observe(this, new EventObserver<>(error -> {
             // show snack bar for errors
-            FunctionExtensionKt.showError(mBinding.getRoot(), error);
+            Util.showError(mBinding.getRoot(), error);
             return null;
         }));
 
@@ -273,7 +274,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
         Drawable drawable = ContextCompat.getDrawable(this, iconResource);
         if (drawable != null) {
-            Bitmap markerBitmap = BitmapUtils.createBitmapFromAndroidBitmap(FunctionExtensionKt.toBitmap(drawable));
+            Bitmap markerBitmap = BitmapUtils.createBitmapFromAndroidBitmap(Util.drawableToBitmap(drawable));
             markStCr.setBitmap(markerBitmap);
         }
 

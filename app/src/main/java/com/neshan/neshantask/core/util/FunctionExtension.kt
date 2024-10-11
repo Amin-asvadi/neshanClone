@@ -1,3 +1,4 @@
+/*
 package com.neshan.neshantask.core.util
 
 import android.graphics.Bitmap
@@ -14,7 +15,6 @@ import com.neshan.neshantask.data.model.error.GeneralError
 import com.neshan.neshantask.data.model.error.NetworkError
 import com.neshan.neshantask.data.model.error.ServerError
 import com.neshan.neshantask.data.model.error.SimpleError
-import com.neshan.neshantask.data.model.error.TimeoutError
 import com.neshan.neshantask.data.model.error.UnknownError
 import retrofit2.HttpException
 import java.net.SocketException
@@ -41,9 +41,11 @@ fun Drawable.toBitmap(): Bitmap {
 
 }
 
+*/
 /**
  * get error detail from Throwable object
- * */
+ * *//*
+
 fun Throwable.getError(): GeneralError {
 
     this.printStackTrace()
@@ -68,9 +70,11 @@ fun Throwable.getError(): GeneralError {
     }
 }
 
+*/
 /**
  * show error as snack bar
- * */
+ * *//*
+
 fun showError(rootView: View, error: GeneralError) {
     when (error) {
         is NetworkError -> {
@@ -91,9 +95,11 @@ fun showError(rootView: View, error: GeneralError) {
     }
 }
 
+*/
 /**
  * calculates distance to target point
- * */
+ * *//*
+
 fun LatLng.distanceFrom(latLng: LatLng): FloatArray {
 
     val distanceResult = FloatArray(3)
@@ -110,18 +116,22 @@ fun LatLng.distanceFrom(latLng: LatLng): FloatArray {
 
 }
 
+*/
 /**
  * checks points are the same
- * */
+ * *//*
+
 fun LatLng.equalsTo(latLng: LatLng): Boolean {
 
     return (this.latitude == latLng.latitude && this.longitude == latLng.longitude)
 
 }
 
+*/
 /**
  * calculate angle between two point (LatLng) with north axis
- * */
+ * *//*
+
 fun angleWithNorthAxis(p1: LatLng, p2: LatLng): Double {
 
     val longDiff = p2.longitude - p1.longitude
@@ -136,4 +146,4 @@ fun angleWithNorthAxis(p1: LatLng, p2: LatLng): Double {
 
     return (a + 360) % 360
 
-}
+}*/

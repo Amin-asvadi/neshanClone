@@ -10,6 +10,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.toBitmap
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.carto.graphics.Color
@@ -24,9 +25,9 @@ import com.neshan.neshantask.core.location.BoundLocationManager
 import com.neshan.neshantask.core.location.BoundLocationManager.REQUEST_CODE_FOREGROUND_PERMISSIONS
 import com.neshan.neshantask.core.location.LocationListener
 import com.neshan.neshantask.core.snackbar.SnackBar
-import com.neshan.neshantask.core.util.angleWithNorthAxis
-import com.neshan.neshantask.core.util.showError
-import com.neshan.neshantask.core.util.toBitmap
+import com.neshan.neshantask.core.snackbar.SnackBarType
+import com.neshan.neshantask.core.util.Util
+import com.neshan.neshantask.core.util.Util.showError
 import com.neshan.neshantask.data.model.error.GeneralError
 import com.neshan.neshantask.data.model.error.SimpleError
 import com.neshan.neshantask.data.util.EventObserver
@@ -35,7 +36,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.neshan.common.model.LatLng
-
 import org.neshan.mapsdk.model.Marker
 import org.neshan.mapsdk.model.Polyline
 
@@ -71,7 +71,7 @@ class NavigationActivity : AppCompatActivity(), LocationListener {
 
         mBinding = ActivityNavigationBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
-        Toast.makeText(this ,"Navigation Activity",Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Navigation Activity", Toast.LENGTH_LONG).show();
         mViewModel = ViewModelProvider(this)[NavigationViewModel::class.java]
         mBinding.vm = mViewModel
 
@@ -112,9 +112,11 @@ class NavigationActivity : AppCompatActivity(), LocationListener {
                     // If user interaction was interrupted, the permission request
                     // is cancelled and you receive empty arrays.
                     Log.d(TAG, "User interaction was cancelled.")
+
                 grantResults[0] == PackageManager.PERMISSION_GRANTED ->
                     // Permission was granted.
                     mLocationManager?.startLocationUpdates()
+
                 else -> {
                     // Permission denied.
 
@@ -157,8 +159,10 @@ class NavigationActivity : AppCompatActivity(), LocationListener {
 
     private fun loadNavigationData() {
 
-        val startPoint = intent.getParcelableExtra<com.neshan.neshantask.data.model.LatLng>(EXTRA_START_POINT)
-        val endPoint = intent.getParcelableExtra<com.neshan.neshantask.data.model.LatLng>(EXTRA_END_POINT)
+        val startPoint =
+            intent.getParcelableExtra<com.neshan.neshantask.data.model.LatLng>(EXTRA_START_POINT)
+        val endPoint =
+            intent.getParcelableExtra<com.neshan.neshantask.data.model.LatLng>(EXTRA_END_POINT)
 
         if (startPoint != null && endPoint != null) {
             mViewModel.startNavigation(
@@ -184,7 +188,12 @@ class NavigationActivity : AppCompatActivity(), LocationListener {
 
         viewModel.reachedDestination.observe(this) { reachedDestination ->
             if (reachedDestination) {
-                SnackBar.make(mBinding.root, getString(R.string.reached_destination)).show()
+                SnackBar.make(
+                    mBinding.root,
+                    getString(R.string.reached_destination),
+                    SnackBarType.NORMAL,
+                    null
+                ).show();
                 lifecycleScope.launch {
                     delay(3000)
                     onBackPressed()
@@ -217,7 +226,7 @@ class NavigationActivity : AppCompatActivity(), LocationListener {
             val startPoint = routePoints[0]
             val endPoint = routePoints[1]
             val bearingEndPoint = routePoints.getOrNull(2) ?: endPoint
-            val angle = angleWithNorthAxis(startPoint, bearingEndPoint)
+            val angle = Util.angleWithNorthAxis(startPoint, bearingEndPoint)
             mBinding.mapview.setBearing((angle).toFloat(), 0.7f)
 
             focusOnLocation(startPoint)
