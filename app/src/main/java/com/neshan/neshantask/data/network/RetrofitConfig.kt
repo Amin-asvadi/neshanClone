@@ -3,13 +3,13 @@ package com.neshan.neshantask.data.network
 import androidx.multidex.BuildConfig
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.neshan.neshantask.data.AppConfig
 import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
-import com.neshan.neshantask.data.AppConfig
 import retrofit2.Converter
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
