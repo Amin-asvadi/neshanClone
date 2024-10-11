@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">NeshanTask</string>
+    <string name="choose_destination">کجا میخوای بری؟</string>
+    <string name="route_go">بزن بریم</string>
+    <string name="notification_channel_id" translatable="false">neshan_notification_channel</string>
+    <string name="preference_file_key" translatable="false">org.neshan.PREFERENCE_FILE_KEY</string>
+    <string name="title_map" translatable="false">Map Fragment</string>
+    <string name="title_choose_location" translatable="false">Choose Location Fragment</string>
+
+    <!-- Location Strings -->
+    <string name="confirm">تایید</string>
+    <string name="move_map_and_choose_location">برای انتخاب، نقشه را تکان دهید</string>
+    <string name="reached_destination">به مقصد رسیدید</string>
+    <string name="navigation_failure">بروز خطا در مسیریابی</string>
+    <string name="main_activity_class_name" translatable="false">org.neshan.main.MainActivity</string>
+    <string name="no_location_text">مکان یافت نشد</string>
+    <string name="permission_rationale">عملکرد صحیح برنامه نیازمند دسترسی به مکان یاب است</string>
+    <string name="permission_denied_explanation">جهت عملکرد بهتر برنامه دسترسی به مکان یاب نیاز است</string>
+    <string name="settings">تنظیمات</string>
+    <string name="ok">تایید</string>
+    <string name="start_point_not_selected">مبدا به درستی انتخاب نشده، دسترسی مکان یاب را بررسی کنید</string>
+    <string name="end_point_not_selected">مقصد به درستی انتخاب نشده</string>
+    <string name="routing_failure">خطا در مسیر یابی</string>
+    <string name="distance">فاصله تا مقصد</string>
+    <string name="duration">زمان رسیدن</string>
+    <string name="stop">پایان</string>
+    <string name="exit">خروج</string>
+    <string name="notification_text">نقشه و مسیریاب نشان</string>
+    <string name="network_connection_error">دسترسی به اینترنت را بررسی کنید</string>
+    <string name="connection_timeout_error">دسترسی به اینترنت را بررسی کنید</string>
+    <string name="unknown_server_error">خطای سرور</string>
+    <string name="unknown_error">خطای غیر منتظره رخ داده</string>
+</resources>
