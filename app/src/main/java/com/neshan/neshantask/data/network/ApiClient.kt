@@ -1,10 +1,10 @@
 package com.neshan.neshantask.data.network
 
 import io.reactivex.rxjava3.core.Single
-import com.neshan.neshantask.data.model.response.AddressDetailResponse
 import com.neshan.neshantask.data.model.response.RoutingResponse
 import retrofit2.http.GET
 import com.neshan.neshantask.data.model.enums.RoutingType
+import com.neshan.neshantask.data.model.response.AddressDetailResponse
 import retrofit2.http.Query
 
 /**
