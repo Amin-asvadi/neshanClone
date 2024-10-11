@@ -10,26 +10,31 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/location"
+        android:layout_width="@dimen/button_height_45"
+        android:layout_height="@dimen/button_height_45"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/btn_gray_light"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="@dimen/margin_10"
+        android:paddingBottom="@dimen/button_height_40"
+        android:tint="@color/colorPrimary"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayoutCompat"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_location" />
+
     <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/linearLayoutCompat"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_bottom_sheet"
         android:padding="@dimen/margin_20"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent">
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintWidth_percent="0.5">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/location"
-            android:layout_width="@dimen/button_height_45"
-            android:layout_height="@dimen/button_height_45"
-            android:layout_marginEnd="@dimen/margin_20"
-            android:background="@drawable/btn_gray_light"
-            android:clickable="true"
-            android:focusable="true"
-            android:padding="@dimen/margin_10"
-            android:tint="@color/colorPrimary"
-            app:srcCompat="@drawable/ic_location" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/chooseLocation"

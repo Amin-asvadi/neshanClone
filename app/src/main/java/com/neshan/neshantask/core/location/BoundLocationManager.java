@@ -143,10 +143,9 @@ public class BoundLocationManager implements DefaultLifecycleObserver {
 
     private void checkLocationAvailability() {
         mLocationSettingTask.addOnSuccessListener(response -> {
-            Log.d(TAG, "All location settings are satisfied");
+            Log.d(TAG, "Location Selected");
         }).addOnFailureListener(exception -> {
             if (exception instanceof ResolvableApiException) {
-                Log.e(TAG, "Location settings are not satisfied");
                 try {
                     ((ResolvableApiException) exception).startResolutionForResult(
                         mContext, REQUEST_CODE_LOCATION_SETTING);

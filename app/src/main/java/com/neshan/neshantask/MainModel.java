@@ -21,19 +21,12 @@ public class MainModel {
         this.mApiClient = apiClient;
     }
 
-    /**
-     * loads address detail for specific location from api service
-     */
     public Single<AddressDetailResponse> getAddress(double latitude, double longitude) {
 
         return mApiClient.getAddress(latitude, longitude)
                 .subscribeOn(Schedulers.io());
 
     }
-
-    /**
-     * loads routes from start point to end point from api service
-     */
     public Single<RoutingResponse> getDirection(RoutingType routType, LatLng start, LatLng end, int bearing) {
 
         String startPoint = start.getLatitude() + "," + start.getLongitude();

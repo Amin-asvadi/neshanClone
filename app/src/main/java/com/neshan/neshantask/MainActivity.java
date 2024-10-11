@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.activity.result.ActivityResultLauncher;
@@ -36,6 +37,7 @@ import com.neshan.neshantask.core.location.BoundLocationManager;
 import com.neshan.neshantask.core.location.LocationListener;
 
 import com.neshan.neshantask.core.util.Util;
+import com.neshan.neshantask.data.network.Result;
 import com.neshan.neshantask.databinding.ActivityMainBinding;
 
 import org.neshan.common.model.LatLng;
@@ -45,6 +47,7 @@ import com.neshan.neshantask.location.ChooseLocationActivity;
 
 import org.neshan.mapsdk.model.Marker;
 import org.neshan.mapsdk.model.Polyline;
+import org.neshan.mapsdk.style.NeshanMapStyle;
 
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
@@ -58,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     private ActivityMainBinding mBinding;
 
     private MainViewModel mViewModel;
-
+    // save current map style
     // handle location updates
     private BoundLocationManager mLocationManager;
 
@@ -145,45 +148,33 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     private void observeViewModelChange(MainViewModel viewModel) {
 
         viewModel.getLocationAddressDetailLiveData().observe(this, result -> {
-            try {
-                Thread.sleep(3300L);
-                mBinding.loading.setVisibility(View.GONE);
 
-                // show location detail bottom sheet
-                LocationDetailBottomSheet bottomSheet = new LocationDetailBottomSheet();
-                bottomSheet.show(getSupportFragmentManager(), "LocationDetail");
-                bottomSheet.setOnDismissListener(dialogInterface -> clearMapObjects());
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
+            if (result.getStatus() == Result.Status.SUCCESS && result.getData() != null) {
+                    // Hide loading view
+                    mBinding.loading.setVisibility(View.GONE);
 
-            if ( result.getData() != null) {
+                    // Show location detail bottom sheet
+                    LocationDetailBottomSheet bottomSheet = new LocationDetailBottomSheet();
+                    bottomSheet.show(getSupportFragmentManager(), "LocationDetail");
+                    bottomSheet.setOnDismissListener(dialogInterface -> clearMapObjects());
 
-                // hide path loading view
-
-
-            } /*else if (result.getStatus() == Result.Status.LOADING) {
-
-                // show path loading view
+            } else if (result.getStatus() == Result.Status.LOADING) {
+                // Show loading view
                 mBinding.loading.setVisibility(View.VISIBLE);
 
             } else if (result.getStatus() == Result.Status.ERROR) {
-
-                // hide path loading view
+                // Hide loading view
                 mBinding.loading.setVisibility(View.GONE);
-
+                // Handle error (e.g., show error message or clear map objects)
                 clearMapObjects();
-
-            }*/
+            }
         });
 
         viewModel.getRoutePoints().observe(this, this::showPathOnMap);
 
         viewModel.getGeneralErrorLiveData().observe(this, new EventObserver<>(error -> {
-            // show snack bar for errors
             Util.showError(mBinding.getRoot(), error);
         }));
-
     }
     private void setViewListeners() {
 
@@ -196,7 +187,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         });
 
         mBinding.chooseLocation.setOnClickListener(view -> {
-            // open Choose Location Activity to choose destination location
             mStartChooseLocationForResult.launch(new Intent(this, ChooseLocationActivity.class));
         });
 
@@ -254,7 +244,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         if (mDestinationMarker != null) {
             mBinding.mapview.removeMarker(mDestinationMarker);
         }
-        mDestinationMarker = createMarker(latLng, R.drawable.ic_location_marker);
+        mDestinationMarker = createMarker(latLng, R.drawable.pin);
         mBinding.mapview.addMarker(mDestinationMarker);
 
         focusOnLocation(latLng);
@@ -289,9 +279,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
     }
 
-    /**
-     * creates path from calculated points for direction path and shows as poly line on map
-     */
     private void showPathOnMap(ArrayList<LatLng> routePoints) {
 
         if (mRoutingPathPolyLine != null) {

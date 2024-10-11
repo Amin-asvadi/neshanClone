@@ -3,11 +3,11 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="defaultBackground">#F7F3F0</color>
-    <color name="colorPrimary">#4EbE4A</color>
-    <color name="colorPrimaryDark">#3B9C38</color>
-    <color name="colorPrimaryDim25">#404EbE4A</color>
-    <color name="colorPrimaryDim50">#804EBE4A</color>
-    <color name="colorPrimaryDim75">#BF4EBE4A</color>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#2196F3</color>
+    <color name="colorPrimaryDim25">#673AB7</color>
+    <color name="colorPrimaryDim50">#03A9F4</color>
+    <color name="colorPrimaryDim75">#00BCD4</color>
     <color name="colorAccent">#F8ECE2</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorWhiteDim25">#40FFFFFF</color>

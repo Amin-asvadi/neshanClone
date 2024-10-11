@@ -1,5 +1,6 @@
 package com.neshan.neshantask;
 
+import android.annotation.SuppressLint;
 import android.app.Application;
 
 import androidx.annotation.NonNull;
@@ -38,21 +39,16 @@ public class MainViewModel extends AndroidViewModel {
 
     private final CompositeDisposable mCompositeDisposable;
 
-    // used for posting possible errors to view
     private final MutableLiveData<Event<GeneralError>> mGeneralError;
 
-    // address detail for selected location
     private final MutableLiveData<Result<AddressDetailResponse>> mLocationAddressDetail;
 
-    // calculated path for selected start and end points
     private final MutableLiveData<RoutingResponse> mRoutingDetail;
 
-    // points for showing direction path on map
     private final MutableLiveData<ArrayList<LatLng>> mRoutePoints;
 
-    // navigation start point
     private LatLng mStartPoint = null;
-    // navigation end point
+
     private LatLng mEndPoint = null;
 
     @Inject
@@ -100,19 +96,31 @@ public class MainViewModel extends AndroidViewModel {
         mEndPoint = latLng;
     }
 
-    /**
-     * try to load address detail from server
-     */
+    @SuppressLint("CheckResult")
     public void loadAddressForLocation(LatLng latLng) {
         mLocationAddressDetail.postValue(Result.loading());
         mModel.getAddress(latLng.getLatitude(), latLng.getLongitude())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe();
+                .subscribe(
+                        addressDetailResponse -> {
+                            // Success: Post the result to mLocationAddressDetail
+                            Result<AddressDetailResponse> successResult = Result.success(addressDetailResponse);
+                            mLocationAddressDetail.postValue(successResult);
+
+                            // Check if the result is a success by comparing the status
+                            if (successResult.getStatus() == Result.Status.SUCCESS) {
+                                // Further actions on success, e.g., logging, UI updates, etc.
+                                AddressDetailResponse data = successResult.getData();
+                                // Do something with the data
+                            }
+                        },
+                        throwable -> {
+                            // Error: Handle the error and post a failure result
+                            mLocationAddressDetail.postValue(Result.error(throwable));
+                        }
+                );
     }
 
-    /**
-     * try to load direction detail from server
-     */
     public void loadDirection(RoutingType routingType) {
         if (mStartPoint == null) {
             SimpleError error = new SimpleError(getApplication().getString(R.string.start_point_not_selected));
@@ -137,11 +145,6 @@ public class MainViewModel extends AndroidViewModel {
 
                                 try {
                                     Route route = response.getRoutes().get(0);
-
-//                                    List<LatLng> routeOverviewPolylinePoints = PolylineEncoding.decode(
-//                                            route.getOverviewPolyline().getEncodedPolyline()
-//                                    );
-//                                    mRoutePoints.postValue(new ArrayList<>(routeOverviewPolylinePoints));
 
                                     ArrayList<LatLng> decodedStepByStepPath = new ArrayList<>();
                                     for (Step step : route.getLegs().get(0).getSteps()) {

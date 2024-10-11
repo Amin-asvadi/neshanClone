@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">NeshanTask</string>
-    <string name="choose_destination">کجا میخوای بری؟</string>
+    <string name="choose_destination">انتخاب مسیر</string>
     <string name="route_go">بزن بریم</string>
     <string name="notification_channel_id" translatable="false">neshan_notification_channel</string>
     <string name="preference_file_key" translatable="false">org.neshan.PREFERENCE_FILE_KEY</string>
@@ -9,12 +9,12 @@
 
     <!-- Location Strings -->
     <string name="confirm">تایید</string>
-    <string name="move_map_and_choose_location">برای انتخاب، نقشه را تکان دهید</string>
+    <string name="move_map_and_choose_location">مقصد را انتخاب کنید</string>
     <string name="reached_destination">به مقصد رسیدید</string>
     <string name="navigation_failure">بروز خطا در مسیریابی</string>
     <string name="main_activity_class_name" translatable="false">org.neshan.main.MainActivity</string>
     <string name="no_location_text">مکان یافت نشد</string>
-    <string name="permission_rationale">عملکرد صحیح برنامه نیازمند دسترسی به مکان یاب است</string>
+    <string name="permission_rationale">نیاز به دسترسی مکان یاب</string>
     <string name="permission_denied_explanation">جهت عملکرد بهتر برنامه دسترسی به مکان یاب نیاز است</string>
     <string name="settings">تنظیمات</string>
     <string name="ok">تایید</string>
