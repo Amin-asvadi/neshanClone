@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -8,9 +10,7 @@
             type="com.neshan.neshantask.MainViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_bottom_sheet"
@@ -26,26 +26,10 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/title"
-            style="@style/font_medium"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_20"
-            android:text="@{viewModel.locationAddressDetailLiveData.data.routeName}"
-            android:textColor="@color/colorGrayDarker"
-            android:textSize="@dimen/text_size_16"
-            android:textStyle="bold"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/anchor"
-            tools:text="@tools:sample/full_names" />
-
-        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/route"
             style="@style/font_medium"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="@dimen/button_height_40"
-            android:layout_marginTop="@dimen/margin_15"
             android:background="@drawable/bg_radius_primary_disabled_25"
             android:clickable="false"
             android:focusable="false"
@@ -55,60 +39,12 @@
             android:text="@string/route_go"
             android:textColor="@color/colorWhite"
             android:textSize="@dimen/text_size_14"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/title" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/durationIcon"
-            android:layout_width="@dimen/icon_size_20"
-            android:layout_height="@dimen/icon_size_20"
-            android:src="@drawable/ic_time"
-            android:tint="@color/colorPrimary"
-            app:layout_constraintBottom_toBottomOf="@id/route"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/route" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/anchor" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/duration"
-            style="@style/font_medium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/margin_10"
-            android:hint="@string/duration"
-            android:textColor="@color/colorGrayMedium"
-            android:textColorHint="@color/colorGrayMedium"
-            android:textSize="@dimen/text_size_12"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@id/route"
-            app:layout_constraintEnd_toStartOf="@id/durationIcon"
-            app:layout_constraintTop_toTopOf="@id/route" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/distanceIcon"
-            android:layout_width="@dimen/icon_size_20"
-            android:layout_height="@dimen/icon_size_20"
-            android:src="@drawable/ic_car"
-            android:tint="@color/colorPrimary"
-            app:layout_constraintBottom_toBottomOf="@id/route"
-            app:layout_constraintEnd_toStartOf="@id/durationIcon"
-            app:layout_constraintHorizontal_bias="0.55"
-            app:layout_constraintStart_toEndOf="@id/route"
-            app:layout_constraintTop_toTopOf="@id/route" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/distance"
-            style="@style/font_medium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/margin_10"
-            android:hint="@string/distance"
-            android:textColor="@color/colorGrayMedium"
-            android:textColorHint="@color/colorGrayMedium"
-            android:textSize="@dimen/text_size_12"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@id/route"
-            app:layout_constraintEnd_toStartOf="@id/distanceIcon"
-            app:layout_constraintTop_toTopOf="@id/route" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/address"

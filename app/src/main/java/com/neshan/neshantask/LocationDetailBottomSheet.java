@@ -107,8 +107,6 @@ public class LocationDetailBottomSheet extends BottomSheetDialogFragment {
                 mBinding.route.setBackgroundResource(R.drawable.bg_radius_primary_25);
                 try {
                     Leg leg = routingDetail.getRoutes().get(0).getLegs().get(0);
-                    mBinding.distance.setText(leg.getDistance().getText());
-                    mBinding.duration.setText(leg.getDuration().getText());
                 } catch (NullPointerException exception) {
                     // failure in getting distance and duration
                     exception.printStackTrace();

@@ -49,7 +49,6 @@ public class ChooseLocationActivity extends AppCompatActivity implements Locatio
 
         mBinding = ActivityChooseLocationBinding.inflate(getLayoutInflater());
         setContentView(mBinding.getRoot());
-        Toast.makeText(this,"Choose Location Activity",Toast.LENGTH_LONG).show();
         setViewListeners();
         setUpLocationManager();
     }
@@ -108,7 +107,6 @@ public class ChooseLocationActivity extends AppCompatActivity implements Locatio
     }
 
     private void setViewListeners() {
-        mBinding.back.setOnClickListener(v -> onBackPressed());
 
         mBinding.location.setOnClickListener(v -> {
             if (mUserLocation != null) {

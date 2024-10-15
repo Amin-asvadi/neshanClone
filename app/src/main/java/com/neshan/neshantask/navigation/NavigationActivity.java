@@ -73,7 +73,6 @@ public class NavigationActivity extends AppCompatActivity implements LocationLis
 
         mBinding = ActivityNavigationBinding.inflate(getLayoutInflater());
         setContentView(mBinding.getRoot());
-        Toast.makeText(this, "Navigation Activity", Toast.LENGTH_LONG).show();
         mViewModel = new ViewModelProvider(this).get(NavigationViewModel.class);
         mBinding.setVm(mViewModel);
 
